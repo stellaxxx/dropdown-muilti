@@ -29,6 +29,13 @@ var common = {
 			type : "POST",
 			data : data,
 			contentType : "application/x-www-form-urlencoded;charset=utf-8",
+			beforeSend : function(xhr, settings) {
+				try {
+					window.history.pushState("", "", url);
+				} catch (err) {
+					console.log("not support push state");
+				}
+			},
 			success : function(data) {
 				var containerObj = $(data).find("#" + target);
 				_target.html(containerObj.html()).show();
